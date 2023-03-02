@@ -18,6 +18,10 @@ st.sidebar.subheader('Stock Parameters')
 start_date = st.sidebar.date_input("Start date", datetime.date(2013, 3, 1))
 end_date = st.sidebar.date_input("End date", datetime.date(2023, 3, 1))
 
+#Pulling ticker data
+ticker_list = pd.read_csv
+
+
 
 tickerSymbol = 'AAPL'
 tickerData = yf.Ticker(tickerSymbol)
