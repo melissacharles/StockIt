@@ -1,22 +1,35 @@
 import yfinance as yf
 import streamlit as st
 import pandas as pd
+import cuffLinks as cf
+import datetime
+
+
+st.markdown('''
+# StockIt Application
+Shown are the stock **open price**, **close price** and ***volume*** of any S&P500 Stock! 
+Bonus: Stock **Recommendations**
+''')
+
+st.write('---')
+
+#Side Panel
+st.sidebar.subheader('Stock Parameters')
+start_date = st.sidebar.date_input("Start date", datetime.date(2013, 3, 1))
+end_date = st.sidebar.date_input("End date", datetime.date(2023, 3, 1))
+
+
+tickerSymbol = 'AAPL'
+tickerData = yf.Ticker(tickerSymbol)
+tickerDf = tickerData.history(
+    period='1d', 
+    start='2012-3-1', 
+    end='2023-3-1')
 
 st.write("""
-# StockIt Application
-Shown are the stock **closing price** and ***volume*** of Apple! 
-Bonus: Stock **Recommendations**
+### Open Price
 """)
-
-#define the ticker symbol
-tickerSymbol = 'AAPL'
-
-#get data on this ticker
-tickerData = yf.Ticker(tickerSymbol)
-
-#get the historical prices for this ticker
-tickerDf = tickerData.history(period='1d', start='2012-12-6', end='2022-12-6')
-# Open	High	Low	Close	Volume	Dividends	Stock Splits
+st.line_chart(tickerDf.Open)
 
 st.write("""
 ### Closing Price
