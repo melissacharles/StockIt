@@ -14,6 +14,7 @@ tickerSymbol = 'AAPL'
 #get data on this ticker
 tickerData = yf.Ticker(tickerSymbol)
 
+
 #get the historical prices for this ticker
 tickerDf = tickerData.history(period='1d', start='2012-12-6', end='2022-12-6')
 # Open	High	Low	Close	Volume	Dividends	Stock Splits
