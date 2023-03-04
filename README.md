@@ -30,9 +30,9 @@ Install **Steamlit** locally as you would normally install an open source framew
     $ pip install streamlit
     $ streamlit hello
 
-Next, install **yfinance** locally via terminal for data that will be pulled:
+Next, install the **pandas**, **requests** and **cufflinks** libraries to run this code locally. You can install these libraries by running the following command in your command prompt or terminal::
 
-    $ pip install yfinance
+    $ pip install pandas requests cufflinks
     
 ### How To Use
  - Clone this repository
