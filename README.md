@@ -10,7 +10,7 @@
 
 ### Introduction
 
-This module provides a framework to easily visualize a stock price and volume for any stock, as well as, stock market recommendations based off of analyst ratings. The web application will display a Pandas dataframe containing daily historical stock data including open price, close price, high, low and volume.
+This is a Python-based web application using the Streamlit library that retrieves stock prices and information using the Tiingo API, and displays it along with Bollinger Bands charts and stock recommendations for any S&P500 stock selected. The application allows for query parameters to be selected via a side panel and the stock ticker to be selected from a web-based text file.
 
 - Submit bug reports and feature suggestions, or track changes email
   melissacharles.py@gmail.com
