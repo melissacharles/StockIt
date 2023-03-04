@@ -1,4 +1,4 @@
-import yfinance as yf
+import pandas_datareader.data as web
 import streamlit as st
 import pandas as pd
 import cufflinks as cf
