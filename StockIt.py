@@ -30,7 +30,7 @@ st.markdown(string_logo, unsafe_allow_html=True)
 string_name = ticker_list[ticker_list['Symbol']==tickerSymbol]['Name'].values[0]
 st.header(f'**{string_name} ({tickerSymbol})**')
 
-string_summary = tickerData.info['longBusinessSummary']
+string_summary = f'https://finviz.com/quote.ashx?t={tickerSymbol}'
 st.info(string_summary)
 
 # Ticker data
