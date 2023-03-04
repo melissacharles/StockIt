@@ -27,8 +27,8 @@ tickerDf = web.DataReader(tickerSymbol, 'yahoo', start_date, end_date) #get the 
 string_logo = f'<img src="https://finviz.com/logo.ashx?t={tickerSymbol}">'
 st.markdown(string_logo, unsafe_allow_html=True)
 
-string_name = tickerData.info['longName']
-st.header('**%s**' % string_name)
+string_name = ticker_list[ticker_list['Symbol']==tickerSymbol]['Name'].values[0]
+st.header(f'**{string_name} ({tickerSymbol})**')
 
 string_summary = tickerData.info['longBusinessSummary']
 st.info(string_summary)
