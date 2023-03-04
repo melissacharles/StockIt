@@ -1,9 +1,8 @@
-import pandas_datareader.data as web
 import streamlit as st
 import pandas as pd
 import cufflinks as cf
 import datetime
-
+import requests
 
 st.markdown('''
 # StockIt Application
@@ -13,30 +12,28 @@ Bonus: Stock **Recommendations**
 
 st.write('---')
 
-#Side Panel
+# Side Panel
 st.sidebar.subheader('Query parameters')
-start_date = st.sidebar.date_input("Start date", datetime.date(2013, 3, 4))
+start_date = st.sidebar.date_input("Start date", datetime.date(2022, 3, 4))
 end_date = st.sidebar.date_input("End date", datetime.date(2023, 3, 4))
 
-#Pulling ticker data
-ticker_list = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/s-and-p-500-companies/master/data/constituents_symbols.txt')
+# Pulling ticker data
+ticker_list = pd.read_csv('https://raw.githubusercontent.com/melissacharles/StockIt/main/ticker_symbols.txt')
 tickerSymbol = st.sidebar.selectbox('Stock ticker', ticker_list) # Select ticker symbol
-tickerDf = web.DataReader(tickerSymbol, 'yahoo', start_date, end_date) #get the historical prices for this ticker
 
-#Ticker Info
-string_logo = f'<img src="https://finviz.com/logo.ashx?t={tickerSymbol}">'
-st.markdown(string_logo, unsafe_allow_html=True)
+api_key = 'e768af1e7d6c1a0be2544a1602e896db21f7cccc'
+url = f'https://api.tiingo.com/tiingo/daily/{tickerSymbol}/prices?startDate={start_date}&endDate={end_date}&token={api_key}'
 
-string_name = ticker_list[ticker_list['Symbol']==tickerSymbol]['Name'].values[0]
-st.header(f'**{string_name} ({tickerSymbol})**')
+response = requests.get(url)
+tickerDf = pd.read_json(response.content.decode('utf-8'))
 
-string_summary = f'https://finviz.com/quote.ashx?t={tickerSymbol}'
-st.info(string_summary)
+# Ticker Info
+st.header(f"**{tickerSymbol}**")
+st.write(f"Data for {start_date} - {end_date}")
 
 # Ticker data
 st.header('**Ticker data**')
 st.write(tickerDf)
-
 
 # Bollinger bands
 st.header('**Bollinger Bands**')
