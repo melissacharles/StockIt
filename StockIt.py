@@ -24,7 +24,7 @@ tickerSymbol = st.sidebar.selectbox('Stock ticker', ticker_list) # Select ticker
 tickerDf = web.DataReader(tickerSymbol, 'yahoo', start_date, end_date) #get the historical prices for this ticker
 
 #Ticker Info
-string_logo = '<img src=%s>' % tickerData.info['logo_url']
+string_logo = f'<img src="https://finviz.com/logo.ashx?t={tickerSymbol}">'
 st.markdown(string_logo, unsafe_allow_html=True)
 
 string_name = tickerData.info['longName']
