@@ -15,14 +15,13 @@ st.write('---')
 
 #Side Panel
 st.sidebar.subheader('Query parameters')
-start_date = st.sidebar.date_input("Start date", datetime.date(2013, 3, 1))
-end_date = st.sidebar.date_input("End date", datetime.date(2023, 3, 1))
+start_date = st.sidebar.date_input("Start date", datetime.date(2013, 3, 4))
+end_date = st.sidebar.date_input("End date", datetime.date(2023, 3, 4))
 
 #Pulling ticker data
 ticker_list = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/s-and-p-500-companies/master/data/constituents_symbols.txt')
 tickerSymbol = st.sidebar.selectbox('Stock ticker', ticker_list) # Select ticker symbol
-tickerData = yf.Ticker(tickerSymbol) # Get ticker data
-tickerDf = tickerData.history(period='1d', start=start_date, end=end_date) #get the historical prices for this ticker
+tickerDf = web.DataReader(tickerSymbol, 'yahoo', start_date, end_date) #get the historical prices for this ticker
 
 #Ticker Info
 string_logo = '<img src=%s>' % tickerData.info['logo_url']
